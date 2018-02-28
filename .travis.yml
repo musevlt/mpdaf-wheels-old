@@ -74,7 +74,7 @@ matrix:
 
 before_install:
     - BUILD_DEPENDS="$NP_BUILD_DEP Cython"
-    - TEST_DEPENDS="$NP_TEST_DEP pytest numexpr fitsio adjustText"
+    - TEST_DEPENDS="$NP_TEST_DEP pytest numexpr adjustText"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
