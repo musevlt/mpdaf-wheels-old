@@ -12,7 +12,9 @@ function pre_build {
     fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
     (cd cfitsio \
         && ./configure --prefix=$BUILD_PREFIX \
-        && make shared && make install)
+        && make && make shared && make install)
+
+    export CFLAGS="-std=c99"
 }
 
 function pip_opts {
