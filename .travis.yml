@@ -73,7 +73,7 @@ matrix:
         - NP_TEST_DEP=numpy==1.11.3
 
 before_install:
-    - BUILD_DEPENDS="$NP_BUILD_DEP"
+    - BUILD_DEPENDS="$NP_BUILD_DEP Cython"
     - TEST_DEPENDS="$NP_TEST_DEP pytest numexpr fitsio adjustText"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
