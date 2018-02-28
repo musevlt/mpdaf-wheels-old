@@ -3,4 +3,4 @@
 	url = https://github.com/matthew-brett/multibuild.git
 [submodule "mpdaf"]
 	path = mpdaf
-	url = git@git-cral.univ-lyon1.fr:MUSE/mpdaf.git
+	url = https://git-cral.univ-lyon1.fr/MUSE/mpdaf.git
