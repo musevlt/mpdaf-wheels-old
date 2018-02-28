@@ -12,15 +12,17 @@ function pre_build {
     fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
     (cd cfitsio \
         && ./configure --prefix=$BUILD_PREFIX \
-        && make && make install)
+        && make shared && make install)
+}
 
-    build_openblas
-
-    local sex_name_ver=sextractor-${SEX_VERSION:-2.19.5}
-    fetch_unpack https://www.astromatic.net/download/sextractor/${sex_name_ver}.tar.gz
-    (cd $sex_name_ver \
-        && ./configure --prefix=$BUILD_PREFIX \
-        && make && make install)
+function pip_opts {
+    # Extra options for pip
+    if [ -n "$IS_OSX" ]; then
+        local suffix=scipy_installers
+    else
+        local suffix=manylinux
+    fi
+    echo "--only-binary matplotlib --find-links https://nipy.bic.berkeley.edu/$suffix"
 }
 
 function run_tests {
@@ -31,5 +33,5 @@ function run_tests {
     python -c "import mpdaf; print(mpdaf)"
     pwd
     ls
-    pytest $MPDAF_INSTALL_DIR
+    pytest --ignore $MPDAF_INSTALL_DIR/lib/mpdaf/sdetect/tests/test_muselet.py $MPDAF_INSTALL_DIR
 }
