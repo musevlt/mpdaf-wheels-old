@@ -13,6 +13,12 @@ function pre_build {
     (cd $cfitsio_name_ver \
         && ./configure --prefix=$BUILD_PREFIX \
         && make && make install)
+
+    local sex_name_ver=sextractor-${SEX_VERSION:-2.19.5}
+    fetch_unpack https://www.astromatic.net/download/sextractor/${sex_name_ver}.tar.gz
+    (cd $sex_name_ver \
+        && ./configure --prefix=$BUILD_PREFIX \
+        && make && make install)
 }
 
 function run_tests {
