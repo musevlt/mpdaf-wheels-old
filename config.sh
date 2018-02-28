@@ -4,8 +4,15 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
-    install_pkg_config
-    build_simple cfitsio ${CFITSIO_VERSION:3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/
+    if [ -n "$IS_OSX" ]; then
+        install_pkg_config
+    fi
+    # build_simple cfitsio ${CFITSIO_VERSION:-3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio
+    local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
+    fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
+    (cd $cfitsio_name_ver \
+        && ./configure --prefix=$BUILD_PREFIX \
+        && make && make install)
 }
 
 function run_tests {
