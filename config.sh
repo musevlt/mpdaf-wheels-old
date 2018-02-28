@@ -35,5 +35,8 @@ function run_tests {
     python -c "import mpdaf; print(mpdaf)"
     pwd
     ls
-    pytest --ignore $MPDAF_INSTALL_DIR/lib/mpdaf/sdetect/tests/test_muselet.py $MPDAF_INSTALL_DIR
+    pytest \
+      --ignore $MPDAF_INSTALL_DIR/mpdaf/sdetect/tests/test_muselet.py \
+      --ignore $MPDAF_INSTALL_DIR/mpdaf/sdetect/tests/test_source.py \
+      $MPDAF_INSTALL_DIR
 }
