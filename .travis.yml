@@ -1,16 +1,10 @@
 env:
     global:
         - REPO_DIR=mpdaf
-        # Commit from your-project that you want to build
         - BUILD_COMMIT=2.4
-        # pip dependencies to _build_ your project
-        - BUILD_DEPENDS="numpy"
-        # pip dependencies to _test_ your project.  Include any dependencies
-        # that you need, that are also specified in BUILD_DEPENDS, this will be
-        # a separate install.
-        - TEST_DEPENDS="pytest numexpr fitsio adjustText"
         - PLAT=x86_64
         - UNICODE_WIDTH=32
+        - CFITSIO_VERSION=3370
         - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
         # Following generated with
         # travis encrypt -r your-org/your-project-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
@@ -34,66 +28,53 @@ matrix:
     - python: 3.5
   include:
     - os: linux
-      env: MB_PYTHON_VERSION=2.7
-    - os: linux
       env:
         - MB_PYTHON_VERSION=2.7
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.3
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.3
-        - PLAT=i686
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.4
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.4
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
-        - PLAT=i686
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.6
-        - PLAT=i686
+        - NP_BUILD_DEP=numpy==1.11.3
+        - NP_TEST_DEP=numpy==1.11.3
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=2.7
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.4
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.5
+        - NP_BUILD_DEP=numpy==1.10.4
+        - NP_TEST_DEP=numpy==1.10.4
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.6
+        - NP_BUILD_DEP=numpy==1.11.3
+        - NP_TEST_DEP=numpy==1.11.3
 
 before_install:
+    - BUILD_DEPENDS="$NP_BUILD_DEP"
+    - TEST_DEPENDS="$NP_TEST_DEP pytest numexpr fitsio adjustText"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
