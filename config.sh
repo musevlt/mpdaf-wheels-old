@@ -10,9 +10,11 @@ function pre_build {
     # build_simple cfitsio ${CFITSIO_VERSION:-3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio
     local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
     fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
-    (cd $cfitsio_name_ver \
+    (cd cfitsio \
         && ./configure --prefix=$BUILD_PREFIX \
         && make && make install)
+
+    build_openblas
 
     local sex_name_ver=sextractor-${SEX_VERSION:-2.19.5}
     fetch_unpack https://www.astromatic.net/download/sextractor/${sex_name_ver}.tar.gz
