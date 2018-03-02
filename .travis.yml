@@ -11,8 +11,7 @@ env:
         # This is for Rackspace uploads.  Contact Matthew Brett, or the
         # scikit-learn team, for # permission (and the API key) to upload to
         # the Rackspace account used here, or use your own account.
-        - secure:
-            "MNKyBWOzu7JAUmC0Y+JhPKfytXxY/ADRmUIMEWZV977FLZPgYctqd+lqel2QIFgdHDO1CIdTSymOOFZckM9ICUXg9Ta+8oBjSvAVWO1ahDcToRM2DLq66fKg+NKimd2OfK7x597h/QmUSl4k8XyvyyXgl5jOiLg/EJxNE2r83IA="
+        - secure: "B+V4+s6FFlwhIpIMkJd/mZUEPvrk/FJpGXcI571he+Zw54EbYNHoEiL9up6FJShY/s9TBQ5nomaHwbe0w23zAkL9SCZ/jTABhkRX09mk/t/P4jSoErThGmg+pdXvDmf1b/O939ecBbEdjlrmn+ZsSJig7PbUi0xKd6lEZlo/UOeuAweoUIClpUa2bvsQtO47q1A09uxuMBvDViFvIBMn3NmbqUd+GzaTfWGMsVMrVaJEoHLhGJdLCM8HCwXH8MEfE5sai51zbgfhvresFezG+E99CiukRbi3vK37LS1qgU1E1C50XDjhpvK2maKclpDAbzX+qQtjK1ueCIsqXccBC+tQseSYwb/dXdcuTbR3wK0sSgUTu7irlWt7cjr4ULfRryZa5XanjlM7Y7Vb7otli1TjwnD7CJ+kAH5EJFfeIkLEqV1cYBghSb9rLxfo6CikTmPP4zjQXC/YCJfroxdrvCP5MSNBODyx1Towfk6dV+GFDRpzYR4d6rS/nHl1j7mgpI5+RFhCCwXwneIUpKwtD2nXP6fGjG1ksbJSuQCukinwIgXcbHLLz9jZiVnxqOjo2QiOEhQdCqZkBrbVuskdBDrlkVARlUA+rQokYrLAuNlCK5NlIWwzfPk/suZU31/ML2LppI4/FrXMQJav9FHGbx2y9I5VZvKpRlaTxa9EfeA="
 
 language: python
 # The travis Python version is unrelated to the version we build and test
