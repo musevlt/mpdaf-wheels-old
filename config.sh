@@ -33,5 +33,5 @@ function run_tests {
     echo $MPDAF_INSTALL_DIR
     python --version
     python -c "import mpdaf; print(mpdaf)"
-    pytest --ignore $MPDAF_INSTALL_DIR/sdetect/tests/ $MPDAF_INSTALL_DIR
+    pytest $MPDAF_INSTALL_DIR
 }
