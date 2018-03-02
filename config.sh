@@ -4,9 +4,7 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
-    if [ -n "$IS_OSX" ]; then
-        install_pkg_config
-    fi
+
     # build_simple cfitsio ${CFITSIO_VERSION:-3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio
     local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
     fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
@@ -14,6 +12,11 @@ function pre_build {
         && ./configure --prefix=$BUILD_PREFIX \
         && make && make shared && make install)
 
+    if [ -n "$IS_OSX" ]; then
+        install_pkg_config
+    fi
+
+    # Use c99 for NAN
     export CFLAGS="-std=c99"
 }
 
