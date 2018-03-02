@@ -6,11 +6,16 @@ function pre_build {
     # Runs in the root directory of this repository.
 
     # build_simple cfitsio ${CFITSIO_VERSION:-3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio
-    local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
-    fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
-    (cd cfitsio \
-        && ./configure --prefix=$BUILD_PREFIX \
-        && make && make shared && make install)
+    if [ -n "$IS_OSX" ]; then
+        # Install cfitsio 3.370
+        brew install https://github.com/Homebrew/homebrew-core/blob/08314f82ea20bc6f19bf2f078bed84e0cfb87dc1/Formula/cfitsio.rb
+    else
+        local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
+        fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
+        (cd cfitsio \
+            && ./configure --prefix=$BUILD_PREFIX \
+            && make shared && make install)
+    fi
 
     if [ -n "$IS_OSX" ]; then
         install_pkg_config
