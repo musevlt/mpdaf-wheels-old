@@ -40,6 +40,6 @@ function run_tests {
     echo $MPDAF_INSTALL_DIR
     python --version
     python -c "import mpdaf; print(mpdaf)"
-    echo "backend : agg" > matplotlibrc
+    export MPLBACKEND='agg'
     pytest $MPDAF_INSTALL_DIR
 }
