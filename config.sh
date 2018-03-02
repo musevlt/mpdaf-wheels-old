@@ -36,10 +36,9 @@ function pip_opts {
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
+    echo "backend : agg" > matplotlibrc
     MPDAF_INSTALL_DIR=$(dirname $(python -c 'import mpdaf; print(mpdaf.__file__)'))
     echo $MPDAF_INSTALL_DIR
     python --version
-    python -c "import mpdaf; print(mpdaf)"
-    MPLBACKEND="agg" python -c 'import matplotlib.pyplot as plt; print(plt.get_backend())'
-    MPLBACKEND="agg" pytest $MPDAF_INSTALL_DIR
+    pytest $MPDAF_INSTALL_DIR
 }
