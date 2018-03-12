@@ -21,7 +21,7 @@ function pre_build {
     fi
 
     # Use c99 for NAN
-    export CFLAGS="-std=c99"
+    export CFLAGS="-g -O0 -std=c99"
 }
 
 function pip_opts {
