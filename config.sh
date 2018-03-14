@@ -48,7 +48,8 @@ function run_tests {
         # brew install cfitsio
         echo "skip"
     else
-        sudo apt-get install libcfitsio-dev
+        # Docker image uses trusty, so cfitsio 3.340
+        sudo apt-get install libcfitsio3-dev
     fi
 
     echo "backend : agg" > matplotlibrc
