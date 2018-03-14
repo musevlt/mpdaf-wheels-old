@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=mpdaf
-        - BUILD_COMMIT=2.5
+        - BUILD_COMMIT=8f4a174ee253feeaac2b889c5ec6e5bba678845c
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP="numpy==1.10.0"
