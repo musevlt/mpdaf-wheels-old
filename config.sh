@@ -1,20 +1,28 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
 
-function pre_build {
-    # Any stuff that you need to do before you start building the wheels
-    # Runs in the root directory of this repository.
+CFITSIO_VERSION=${CFITSIO_VERSION:-3370}
 
-    # build_simple cfitsio ${CFITSIO_VERSION:-3370} https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio
+function build_cfitsio {
+    if [ -e cfitsio-stamp ]; then return; fi
     if [ -n "$IS_OSX" ]; then
         brew install cfitsio
     else
-        local cfitsio_name_ver=cfitsio${CFITSIO_VERSION:-3370}
+        # cannot use build_simple because cfitsio has no dash between name and version
+        local cfitsio_name_ver=cfitsio${CFITSIO_VERSION}
         fetch_unpack https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/${cfitsio_name_ver}.tar.gz
         (cd cfitsio \
             && ./configure --prefix=$BUILD_PREFIX \
             && make shared && make install)
     fi
+    touch cfitsio-stamp
+}
+
+function pre_build {
+    # Any stuff that you need to do before you start building the wheels
+    # Runs in the root directory of this repository.
+
+    build_cfitsio
 
     if [ -n "$IS_OSX" ]; then
         install_pkg_config
@@ -35,8 +43,12 @@ function pip_opts {
 }
 
 function run_tests {
-    # Runs tests on installed distribution from an empty directory
+    # Install cfitsio to run the combine tests
+    build_cfitsio
+
     echo "backend : agg" > matplotlibrc
+
+    # Runs tests on installed distribution from an empty directory
     MPDAF_INSTALL_DIR=$(dirname $(python -c 'import mpdaf; print(mpdaf.__file__)'))
     echo $MPDAF_INSTALL_DIR
     python --version
