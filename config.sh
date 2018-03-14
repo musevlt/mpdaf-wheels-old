@@ -45,9 +45,10 @@ function pip_opts {
 function run_tests {
     # Install cfitsio to run the combine tests
     if [ -n "$IS_OSX" ]; then
-        brew install cfitsio
+        # brew install cfitsio
+        echo "skip"
     else
-        sudo apt-get install cfitsio
+        sudo apt-get install libcfitsio-dev
     fi
 
     echo "backend : agg" > matplotlibrc
