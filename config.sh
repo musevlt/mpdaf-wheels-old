@@ -39,7 +39,7 @@ function pip_opts {
     else
         local suffix=manylinux
     fi
-    echo "-v --only-binary matplotlib --find-links https://nipy.bic.berkeley.edu/$suffix"
+    echo "--only-binary matplotlib --find-links https://nipy.bic.berkeley.edu/$suffix"
 }
 
 function run_tests {
@@ -49,7 +49,7 @@ function run_tests {
         echo "skip"
     else
         # Docker image uses trusty, so cfitsio 3.340
-        sudo apt-get install libcfitsio3-dev
+        sudo apt-get install -y libcfitsio3-dev
     fi
 
     echo "backend : agg" > matplotlibrc
