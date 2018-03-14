@@ -44,6 +44,8 @@ function pip_opts {
 
 function run_tests {
     # Install cfitsio to run the combine tests
+    source $MULTIBUILD_DIR/configure_build.sh
+    source $MULTIBUILD_DIR/library_builders.sh
     build_curl
     build_cfitsio
 
