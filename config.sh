@@ -44,6 +44,7 @@ function pip_opts {
 
 function run_tests {
     # Install cfitsio to run the combine tests
+    build_curl
     build_cfitsio
 
     echo "backend : agg" > matplotlibrc
